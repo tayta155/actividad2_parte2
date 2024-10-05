@@ -8,12 +8,12 @@ import java.util.List;
 
 class Nodo {
     String name_station;
-    int linea;
+    String linea;  // Cambiado a String
     String horasServicio;
     String direccion;
     List<Nodo> adyacentes;
 
-    Nodo(String name_station, int linea, String horasServicio, String direccion) {
+    Nodo(String name_station, String linea, String horasServicio, String direccion) {
         this.name_station = name_station;
         this.linea = linea;
         this.horasServicio = horasServicio;
@@ -24,7 +24,7 @@ class Nodo {
     @Override
     public String toString() {
         return "Estación: " + name_station + "\n" +
-               "Línea: " + linea + "\n" +
+               "Línea: " + linea + "\n" +  // Ahora línea es String
                "Horas de servicio: " + horasServicio + "\n" +
                "Dirección: " + direccion + "\n";
     }
@@ -37,7 +37,7 @@ class Conexiones {
         estaciones = new HashMap<>();
     }
 
-    public void addEstacion(String name_station, int linea, String horasServicio, String direccion) {
+    public void addEstacion(String name_station, String linea, String horasServicio, String direccion) {
         estaciones.putIfAbsent(name_station, new Nodo(name_station, linea, horasServicio, direccion));
     }
 
@@ -57,21 +57,17 @@ class Conexiones {
         if (nodoAEliminar != null) {
             List<Nodo> adyacentes = nodoAEliminar.adyacentes;
             
-            // Reconectar las estaciones adyacentes entre ellas
             if (adyacentes.size() >= 2) {
                 Nodo estacionA = adyacentes.get(0);
                 Nodo estacionC = adyacentes.get(1);
-                // Conectar las estaciones A y C directamente
                 estacionA.adyacentes.add(estacionC);
                 estacionC.adyacentes.add(estacionA);
             }
 
-            // Eliminar la estación de las listas de adyacentes
             for (Nodo nodo : adyacentes) {
                 nodo.adyacentes.remove(nodoAEliminar);
             }
 
-            // Finalmente, eliminar la estación del mapa
             estaciones.remove(nombreEstacion);
         }
     }
@@ -80,7 +76,7 @@ class Conexiones {
         StringBuilder sb = new StringBuilder();
         for (Nodo nodo : estaciones.values()) {
             sb.append("Estación: ").append(nodo.name_station).append("\n")
-              .append("Líne: ").append(nodo.linea).append("\n")
+              .append("Línea: ").append(nodo.linea).append("\n")  // Línea como String
               .append("Horas de servicio: ").append(nodo.horasServicio).append("\n")
               .append("Dirección: ").append(nodo.direccion).append("\n")
               .append("Conectada con: ");
@@ -115,7 +111,7 @@ public class Ejemplo1 extends JFrame {
         panel.setLayout(new GridLayout(7, 2));
 
         nameField = new JTextField(20);
-        lineaField = new JTextField(5);
+        lineaField = new JTextField(5);  // Ahora permite texto para la línea
         horasField = new JTextField(20);
         direccionField = new JTextField(20);
         conexionField = new JTextField(20);
@@ -131,7 +127,7 @@ public class Ejemplo1 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nombreEstacion = nameField.getText();
-                int linea = Integer.parseInt(lineaField.getText());
+                String linea = lineaField.getText();  // Capturamos la línea como String
                 String horasServicio = horasField.getText();
                 String direccion = direccionField.getText();
 
@@ -183,7 +179,7 @@ public class Ejemplo1 extends JFrame {
         panel.add(new JLabel("Nombre de la estación:"));
         panel.add(nameField);
         panel.add(new JLabel("Número de línea:"));
-        panel.add(lineaField);
+        panel.add(lineaField);  // Ahora acepta caracteres
         panel.add(new JLabel("Horas de servicio:"));
         panel.add(horasField);
         panel.add(new JLabel("Dirección:"));
