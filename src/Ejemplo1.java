@@ -24,7 +24,7 @@ class Nodo {
     @Override
     public String toString() {
         return "Estación: " + name_station + "\n" +
-               "Línea: " + linea + "\n" +  // Ahora línea es String
+               "Línea: " + linea + "\n" + 
                "Horas de servicio: " + horasServicio + "\n" +
                "Dirección: " + direccion + "\n";
     }
