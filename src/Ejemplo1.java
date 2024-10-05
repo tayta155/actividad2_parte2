@@ -80,7 +80,7 @@ class Conexiones {
         StringBuilder sb = new StringBuilder();
         for (Nodo nodo : estaciones.values()) {
             sb.append("Estación: ").append(nodo.name_station).append("\n")
-              .append("Línea: ").append(nodo.linea).append("\n")
+              .append("Líne: ").append(nodo.linea).append("\n")
               .append("Horas de servicio: ").append(nodo.horasServicio).append("\n")
               .append("Dirección: ").append(nodo.direccion).append("\n")
               .append("Conectada con: ");
